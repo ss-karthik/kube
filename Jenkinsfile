@@ -1,28 +1,22 @@
 pipeline {
-    agent any 
+    agent any
 
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    // Build your Docker image
-                    sh 'docker build -t my-kube:latest .'
+                    // Build the image (name it however you like)
+                    dockerImage = docker.build("my-kube1:latest")
                 }
             }
         }
-        stage('Test') {
+
+        stage('Push to Docker Hub') {
             steps {
                 script {
-                    // Run tests here if you have any
-                    echo 'Running tests...'
-                }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                script {
-                    // Deploy your Docker image
-                    echo 'Deploying application...'
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
+                        dockerImage.push('latest')
+                    }
                 }
             }
         }

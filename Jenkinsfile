@@ -23,11 +23,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'minikube start'
                     sh 'kubectl apply -f my-kube1-deployment.yaml'
                     sh 'kubectl apply -f my-kube1-service.yaml'
-                    echo '✅ Deployed successfully to Minikube!'
-                }
+                    echo '✅ Deployedsuccessfully to Minikube!'
+                } 
             }
         }
     }

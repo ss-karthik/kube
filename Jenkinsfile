@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HOST = "unix:///home/karthik/.docker/desktop/docker.sock"
+        DOCKER_HOST = "unix:///var/run/docker-desktop/docker.sock"
     }
 
     stages {

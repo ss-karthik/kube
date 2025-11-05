@@ -9,4 +9,4 @@ spec:
   ports:
     - protocol: TCP
       port: 8082       # External port
-      targetPort: 3001 # Internal container port
+      targetPort: 3000 # Internal container port

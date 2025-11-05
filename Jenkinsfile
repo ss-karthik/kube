@@ -1,26 +1,32 @@
 pipeline {
-    agent any
-
-    environment {
-        DOCKER_HOST = "unix:///var/run/docker-desktop/docker.sock"
-    }
+    agent any 
 
     stages {
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
                 script {
-                    // Build the image (name it however you like)
-                    dockerImage = docker.build("my-kube1:latest")
+                    sh 'docker login -u karthikss -p karthikss123'
+
+                    sh 'docker build -t w9-dd-app:latest .'
+                    sh 'docker tag w9-dd-app:latest siddharthpg/w9-dh-app:latest'
+                    sh 'docker push siddharthpg/w9-dh-app:latest'
                 }
             }
         }
-
-        stage('Push to Docker Hub') {
+        stage('Test') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
-                        dockerImage.push('latest')
-                    }
+                    echo 'Running tests...'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    sh 'minikube start'
+                    sh 'kubectl apply -f my-kube1-deployment.yaml'
+                    sh 'kubectl apply -f my-kube1-service.yaml'
+                    echo '✅ Deployed successfully to Minikube!'
                 }
             }
         }

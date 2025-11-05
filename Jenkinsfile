@@ -8,8 +8,8 @@ pipeline {
                     sh 'docker login -u karthikss -p karthikss123'
 
                     sh 'docker build -t w9-dd-app:latest .'
-                    sh 'docker tag w9-dd-app:latest siddharthpg/w9-dh-app:latest'
-                    sh 'docker push siddharthpg/w9-dh-app:latest'
+                    sh 'docker tag w9-dd-app:latest karthikss123/w9-dh-app:latest'
+                    sh 'docker push karthikss123/w9-dh-app:latest'
                 }
             }
         }

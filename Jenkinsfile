@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_HOST = "unix:///home/karthik/.docker/desktop/docker.sock"
+    }
+
     stages {
         stage('Build Docker Image') {
             steps {

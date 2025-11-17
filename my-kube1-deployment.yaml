@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-kube1-deployment
+  name: my-kube-deployment
   labels:
-    app: my-kube-app1
+    app: my-kube-app
 spec:
   replicas: 2  # Number of pods to run
   selector:
     matchLabels:
-      app: my-kube-app1
+      app: my-kube-app
   template:
     metadata:
       labels:
-        app: my-kube-app1
+        app: my-kube-app
     spec:
       containers:
-        - name: my-kube1-container
-          image: shiv4j/my-kube1:latest  # Your Docker image
+        - name: my-kube-container
+          image: karthikss123/my-kube:latest  # Your Docker image
           ports:
-            - containerPort: 3001  # Port inside the container
+            - containerPort: 3000  # Port inside the container
           resources:
             limits:
               memory: "512Mi"

@@ -5,11 +5,11 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'docker login -u karthikss -p karthikss123'
+                    sh 'docker login -u karthikss123 -p Km68vk@11'
 
-                    sh 'docker build -t w9-dd-app:latest .'
-                    sh 'docker tag w9-dd-app:latest karthikss123/w9-dh-app:latest'
-                    sh 'docker push karthikss123/w9-dh-app:latest'
+                    sh 'docker build -t my-kube:latest .'
+                    sh 'docker tag my-kube:latest karthikss123/my-kube:latest'
+                    sh 'docker push karthikss123/my-kube:latest'
                 }
             }
         }
@@ -23,6 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    sh 'minikube start'
                     sh 'kubectl apply -f my-kube1-deployment.yaml'
                     sh 'kubectl apply -f my-kube1-service.yaml'
                     echo '✅ Deployedsuccessfully to Minikube!'
